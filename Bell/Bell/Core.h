@@ -6,27 +6,54 @@ namespace bell
 {
 	namespace core
 	{
+
 		template<class T>
-		void print(const T& t)
+		void print(const T t)
 		{
 			std::cout << t;
 		}
 
+		template<class T>
+		void print(T* t)
+		{
+			std::cout << *t;
+		}
+
 		template <class T, class ... TAIL>
-		void print(const T& t, TAIL... tail)
+		void print(const T t, TAIL... tail)
+		{
+			print(t);
+			print(tail...);
+		}
+
+		template<class T, class ...TAIL>
+		void print(T* t, TAIL... tail)
 		{
 			print(t);
 			print(tail...);
 		}
 
 		template<class T>
-		void println(const T& t)
+		void println(const T t)
+		{			
+			print(t, '\n');
+		}
+
+		template<class T>
+		void println(T* t)
 		{
 			print(t, '\n');
 		}
 
 		template<class T, class ...TAIL>
-		void println(const T& t, TAIL... tail)
+		void println(const T t, TAIL... tail)
+		{
+			print(t);
+			println(tail...);
+		}
+
+		template<class T, class ...TAIL>
+		void println(T* t, TAIL... tail)
 		{
 			print(t);
 			println(tail...);
