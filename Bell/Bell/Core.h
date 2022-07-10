@@ -22,7 +22,7 @@ namespace bell
 		template <class T, class ... TAIL>
 		void print(const T t, TAIL... tail)
 		{
-			print(t);
+			print(&t);
 			print(tail...);
 		}
 
@@ -36,7 +36,7 @@ namespace bell
 		template<class T>
 		void println(const T t)
 		{			
-			print(t, '\n');
+			print(&t, '\n');
 		}
 
 		template<class T>
@@ -48,7 +48,7 @@ namespace bell
 		template<class T, class ...TAIL>
 		void println(const T t, TAIL... tail)
 		{
-			print(t);
+			print(&t);
 			println(tail...);
 		}
 

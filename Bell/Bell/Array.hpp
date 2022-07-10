@@ -35,13 +35,16 @@ namespace bell
 				{
 					res[i] = source[i];
 				}
-
 				return res;
 			}
 
 		public:
 			T &operator[](const int& index)
 			{
+				if (!index)
+				{
+					throw std::out_of_range("Array index out of range");
+				}
 				if (index >= 0)
 				{
 					return elements[index];					
@@ -109,7 +112,20 @@ namespace bell
 				{
 					if(elements[i] == obj)
 					{
-						res.append(i);
+						res.append(elements[i]);
+					}
+				}
+				return res;
+			}
+
+			Array<int> findAll(std::function<bool(const T&)> fun)
+			{
+				auto res = Array<int>();
+				for (int i = 0; i < size; i++)
+				{
+					if (fun(elements[i]))
+					{
+						res.append(elements[i]);
 					}
 				}
 				return res;
@@ -142,12 +158,19 @@ namespace bell
 			template<class U>
 			friend std::ostream& operator<<(std::ostream& os, const Array<U>& obj)
 			{
-				os << '[';
-				for (int i = 0; i < obj.size - 1; i++)
+				if (obj.size)
 				{
-					os << obj.elements[i] << ", ";
+					os << '[';
+					for (int i = 0; i < obj.size - 1; i++)
+					{
+						os << obj.elements[i] << ", ";
+					}
+					os << obj.elements[obj.size - 1] << "]";					
 				}
-				os << obj.elements[obj.size - 1] << "]";
+				else
+				{
+					os << "[]";
+				}
 				return os;
 			}
 		};
