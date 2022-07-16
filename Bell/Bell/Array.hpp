@@ -14,10 +14,11 @@ namespace bell
 			T* elements;
 
 			// actual number of elements
-			int size{};
+			long long size{};
+
 
 			// how many elements there are in memory
-			int capacity{};
+			long long capacity{};
 
 			template <class T>
 			T* duplicateArray(
@@ -39,15 +40,11 @@ namespace bell
 			}
 
 		public:
-			T &operator[](const int& index)
+			T& operator[](const int& index)
 			{
-				if (!index)
-				{
-					throw std::out_of_range("Array index out of range");
-				}
 				if (index >= 0)
 				{
-					return elements[index];					
+					return elements[index];
 				}
 				return elements[size + index];
 			}
@@ -59,7 +56,7 @@ namespace bell
 				elements = new T[0];
 			}
 
-			Array(const int& size) : size(size), capacity(size)
+			Array(const long long& size) : size(size), capacity(size)
 			{
 				elements = new T[size];
 			}
@@ -105,27 +102,27 @@ namespace bell
 				return -1;
 			}
 
-			Array<int> findAll(const T& obj)
+			std::shared_ptr<Array<int>> findAll(const T& obj)
 			{
-				auto res = Array<int>();
+				std::shared_ptr<Array<int>> res(new Array<int>());
 				for (int i = 0; i < size; i++)
 				{
-					if(elements[i] == obj)
+					if (elements[i] == obj)
 					{
-						res.append(elements[i]);
+						res->append(elements[i]);
 					}
 				}
 				return res;
 			}
 
-			Array<int> findAll(std::function<bool(const T&)> fun)
+			std::shared_ptr<Array<int>> findAll(std::function<bool(const T&)> fun)
 			{
-				auto res = Array<int>();
+				std::shared_ptr<Array<int>> res(new Array<int>());
 				for (int i = 0; i < size; i++)
 				{
 					if (fun(elements[i]))
 					{
-						res.append(elements[i]);
+						res->append(elements[i]);
 					}
 				}
 				return res;
@@ -155,24 +152,69 @@ namespace bell
 				elements[size++] = obj;
 			}
 
-			template<class U>
-			friend std::ostream& operator<<(std::ostream& os, const Array<U>& obj)
+			template <class U>
+			friend std::ostream& operator<<(std::ostream& out, const Array<U>& obj)
 			{
 				if (obj.size)
 				{
-					os << '[';
+					out << '[';
 					for (int i = 0; i < obj.size - 1; i++)
 					{
-						os << obj.elements[i] << ", ";
+						out << obj.elements[i] << ", ";
 					}
-					os << obj.elements[obj.size - 1] << "]";					
+					out << obj.elements[obj.size - 1] << "]";
 				}
 				else
 				{
-					os << "[]";
+					out << "[]";
 				}
-				return os;
+				return out;
 			}
+
+			[[nodiscard]] long long getSize() const
+			{
+				return size;
+			}
+
+			// iterators
+			class iterator
+			{
+				int pos;
+				Array<T>& object;
+			public:
+				iterator(const int& pos, Array<T>& obj) : pos(pos), object(obj) {}
+
+				iterator& operator++()
+				{
+					pos++;
+					return *this;
+				}
+
+				iterator& operator++(int)
+				{
+					pos++;
+					return *this;
+				}
+
+				T& operator*() const
+				{
+					return object[pos];
+				}
+
+				bool operator==(const iterator& other) const
+				{
+					return pos == other.pos;
+				}
+
+				bool operator!=(const iterator& other) const
+				{
+					return pos != other.pos;
+				}
+			};
+
+			inline iterator begin() { return iterator(0, *this); }
+
+			inline iterator end() { return iterator(size, *this); }
 		};
 	}
 };
