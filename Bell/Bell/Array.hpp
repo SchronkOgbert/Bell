@@ -40,7 +40,7 @@ namespace bell
 			}
 
 		public:
-			T& operator[](const int& index)
+			T& operator[](const int& index) const
 			{
 				if (index >= 0)
 				{
