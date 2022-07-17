@@ -152,25 +152,6 @@ namespace bell
 				elements[size++] = obj;
 			}
 
-			template <class U>
-			friend std::ostream& operator<<(std::ostream& out, const Array<U>& obj)
-			{
-				if (obj.size)
-				{
-					out << '[';
-					for (int i = 0; i < obj.size - 1; i++)
-					{
-						out << obj.elements[i] << ", ";
-					}
-					out << obj.elements[obj.size - 1] << "]";
-				}
-				else
-				{
-					out << "[]";
-				}
-				return out;
-			}
-
 			[[nodiscard]] long long getSize() const
 			{
 				return size;
@@ -216,5 +197,24 @@ namespace bell
 
 			inline iterator end() { return iterator(size, *this); }
 		};
+		template <class U>
+		std::ostream& operator<<(std::ostream& out, const Array<U>& obj)
+		{
+			if (obj.getSize())
+			{
+				out << '[';
+				for (int i = 0; i < obj.getSize() - 1; i++)
+				{
+					out << obj[i] << ", ";
+				}
+				out << obj[obj.getSize() - 1] << "]";
+			}
+			else
+			{
+				out << "[]";
+			}
+			return out;
+		}
+		
 	}
 };

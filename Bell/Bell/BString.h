@@ -3,7 +3,7 @@
 #ifdef _MSC_VER
 #define strdup(p) _strdup(p)
 #endif
-
+#include "Array.hpp"
 
 
 namespace bell
@@ -12,7 +12,7 @@ namespace bell
 	{
 		char* chars;
 
-		int size;
+		long long size;
 
 	public:
 		class iterator
@@ -39,7 +39,15 @@ namespace bell
 
 		string(const char* cString);
 
-		inline int& getLength() { return size; }
+		std::shared_ptr<collections::Array<string>> split(const string& delimiter = " ");
+
+		long long findFirst(const string& str, long long start = 0) const;
+
+		long long findFirst(const char* str, long long start = 0) const;
+
+		string substring(const int& start, const int& end) const;
+
+		inline long long getLength() const { return size; }
 
 		inline iterator begin() { return iterator(0, *this); }
 
@@ -53,8 +61,9 @@ namespace bell
 
 		char& operator[](const int& index) const;
 
+		bool operator==(const string&) const;
+
 		~string();
 	};
-	
 }
 	

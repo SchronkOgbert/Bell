@@ -1,7 +1,10 @@
 #include "pch.h"
 #include "BString.h"
 
+#include "Core.h"
+
 using namespace bell;
+using namespace core;
 
 string::iterator::iterator(const int& pos, string& obj) : pos(pos), object(obj)
 {
@@ -54,6 +57,32 @@ string::string(const char* cString)
 	size = strlen(chars);
 }
 
+std::shared_ptr<collections::Array<string>> string::split(const string& delimiter)
+{
+	std::shared_ptr<collections::Array<string>> res(new collections::Array<string>());
+	int start = 0;
+	int end = this->findFirst(delimiter);
+	while (end != -1) 
+	{
+		res->append(this->substring(start, end));
+		start = end + delimiter.getLength();
+		end = this->findFirst(delimiter, start);
+	}
+	res->append(this->substring(start, end));
+	return res;
+}
+
+long long string::findFirst(const string& str, long long start) const
+{
+	return this->findFirst(str.chars, start);
+}
+
+long long string::findFirst(const char* str, long long start) const
+{
+	if (start >= strlen(this->chars)) throw std::out_of_range("Start position outside of string range");
+	return std::string(this->chars).find(str, start);
+}
+
 string& string::operator=(const string& other)
 {
 	delete[] chars;
@@ -86,4 +115,20 @@ char& string::operator[](const int& index) const
 		return chars[index];
 	}
 	return chars[size + index];
+}
+
+bool string::operator==(const string& other) const
+{
+	return strcmp(this->chars, other.chars) == 0;
+}
+
+string string::substring(const int& start, const int& end) const
+{
+	if (end == -1)
+	{
+		return { std::string(this->chars).substr(start, this->size - start).c_str() };
+	}
+	if (end < start) 
+		throw std::logic_error("End position cannot be smaller than start position");
+	return { std::string(this->chars).substr(start, end - start).c_str() };
 }
