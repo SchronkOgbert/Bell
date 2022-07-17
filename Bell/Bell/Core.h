@@ -98,13 +98,13 @@ namespace bell
 		template<class T>
 		std::ostream& operator<<(std::ostream& out, const std::shared_ptr<T>& obj)
 		{
-			return out << *obj.get();
+			return out << *obj;
 		}
 
 		template <class T>
 		std::ostream& operator<<(std::ostream& out, std::unique_ptr<T>& obj)
 		{
-			return out << *obj.get();
+			return out << *obj;
 		}
 	}
 }

@@ -41,11 +41,15 @@ namespace bell
 
 		std::shared_ptr<collections::Array<string>> split(const string& delimiter = " ");
 
-		long long findFirst(const string& str, long long start = 0) const;
+		[[nodiscard]] long long count(const char& chr) const;
+
+		long long count(const std::function<bool(const char&)>& fun) const;
+
+		[[nodiscard]] long long findFirst(const string& str, long long start = 0) const;
 
 		long long findFirst(const char* str, long long start = 0) const;
 
-		string substring(const int& start, const int& end) const;
+		[[nodiscard]] string substring(const int& start, const int& end) const;
 
 		inline long long getLength() const { return size; }
 

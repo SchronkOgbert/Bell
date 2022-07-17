@@ -72,6 +72,26 @@ std::shared_ptr<collections::Array<string>> string::split(const string& delimite
 	return res;
 }
 
+long long string::count(const char& chr) const
+{
+	long long count = 0;
+	for (int i = 0; i < size; i++)
+	{
+		count += (chars[i] == chr);
+	}
+	return count;
+}
+
+long long string::count(const std::function<bool(const char&)>& fun) const
+{
+	long long count = 0;
+	for (int i = 0; i < size; i++)
+	{
+		count += fun(chars[i]);
+	}
+	return count;
+}
+
 long long string::findFirst(const string& str, long long start) const
 {
 	return this->findFirst(str.chars, start);
