@@ -73,9 +73,10 @@ namespace bell
 				delete[] elements;
 			}
 
-			void insert(const int& index, const T& obj) override
+			void insert(const long long& index, const T& obj) override
 			{
-				throw std::logic_error("Not implemented");
+				this->append(obj);
+				std::swap(elements[index], elements[size - 1]);
 			}
 
 			int findFirst(const T& obj) override
@@ -128,14 +129,53 @@ namespace bell
 				return res;
 			}
 
+			void removeAt(const long long& index) override
+			{
+				if (index >= size || index < 0) 
+					throw std::out_of_range("index out of range");
+				for (auto i = index; i < size - 1; i++)
+				{
+					elements[i] = elements[i + 1];
+				}
+				size--;
+			}
+
 			void remove(const T& obj) override
 			{
-				throw std::logic_error("Not implemented");
+				T* new_elements = new T[capacity];
+				auto new_size = size;
+				for (int i = 0, j = 0; i < size; i++)
+				{
+					if (elements[i] == obj)
+					{
+						new_size--;
+						continue;
+					}
+					new_elements[j] = elements[i];
+					j++;
+				}
+				size = new_size;
+				delete[] elements;
+				elements = new_elements;
 			}
 
 			void remove(const std::function<bool(const T&)>& fun) override
 			{
-				throw std::logic_error("Not implemented");
+				T* new_elements = new T[capacity];
+				auto new_size = size;
+				for (int i = 0, j = 0; i < size; i++)
+				{
+					if (fun(elements[i]))
+					{
+						new_size--;
+						continue;
+					}
+					new_elements[j] = elements[i];
+					j++;
+				}
+				size = new_size;
+				delete[] elements;
+				elements = new_elements;
 			}
 
 			void append(const T obj)

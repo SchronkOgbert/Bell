@@ -11,11 +11,13 @@ namespace bell
 		public:
 			virtual ~ICollection() = default;
 
-			virtual void insert(const int& index, const T& obj) = 0;
+			virtual void insert(const long long& index, const T& obj) = 0;
 
 			virtual int findFirst(const T& obj) = 0;
 
 			virtual int findFirst(std::function<bool(const T&)> fun) = 0;
+
+			virtual void removeAt(const long long& index) = 0;
 
 			virtual void remove(const T& obj) = 0;
 

@@ -12,7 +12,7 @@ namespace bell
 	{
 		char* chars;
 
-		long long size;
+		size_t size;
 
 	public:
 		class iterator
@@ -51,7 +51,7 @@ namespace bell
 
 		[[nodiscard]] string substring(const int& start, const int& end) const;
 
-		inline long long getLength() const { return size; }
+		[[nodiscard]] inline size_t getLength() const { return size; }
 
 		inline iterator begin() { return iterator(0, *this); }
 

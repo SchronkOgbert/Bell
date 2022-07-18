@@ -107,6 +107,7 @@ string& string::operator=(const string& other)
 {
 	delete[] chars;
 	chars = _strdup(other.chars);
+	size = strlen(chars);
 	return *this;
 }
 
