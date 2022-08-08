@@ -14,17 +14,16 @@ namespace bell
 			T* elements;
 
 			// actual number of elements
-			long long size{};
+			BSize size{};
 
 
 			// how many elements there are in memory
-			long long capacity{};
-
-			template <class T>
+			BSize capacity{};
+			
 			T* duplicateArray(
 				T* source,
-				const int& new_size,
-				const int& old_size
+				const BSize& new_size,
+				const BSize& old_size
 			)
 			{
 				if (new_size < old_size)
@@ -32,7 +31,7 @@ namespace bell
 					throw std::logic_error("New size cannot be smaller");
 				}
 				T* res = new T[new_size];
-				for (size_t i = 0; i < old_size; i++)
+				for (BSize i = 0; i < old_size; i++)
 				{
 					res[i] = source[i];
 				}
@@ -68,7 +67,7 @@ namespace bell
 				elements = duplicateArray(other.elements, capacity, size);
 			}
 
-			~Array() override
+			virtual ~Array()
 			{
 				delete[] elements;
 			}
@@ -79,9 +78,9 @@ namespace bell
 				std::swap(elements[index], elements[size - 1]);
 			}
 
-			int findFirst(const T& obj) override
+			BSize findFirst(const T& obj) override
 			{
-				for (size_t i = 0; i < size; i++)
+				for (BSize i = 0; i < size; i++)
 				{
 					if (elements[i] == obj)
 					{
@@ -91,9 +90,9 @@ namespace bell
 				return -1;
 			}
 
-			int findFirst(std::function<bool(const T&)> fun) override
+			BSize findFirst(std::function<bool(const T&)> fun) override
 			{
-				for (int i = 0; i < size; i++)
+				for (BSize i = 0; i < size; i++)
 				{
 					if (fun(elements[i]))
 					{
@@ -192,7 +191,7 @@ namespace bell
 				elements[size++] = obj;
 			}
 
-			[[nodiscard]] long long getSize() const
+			[[nodiscard]] BSize getSize() const
 			{
 				return size;
 			}

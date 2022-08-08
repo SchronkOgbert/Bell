@@ -6,7 +6,7 @@
 using namespace bell;
 using namespace core;
 
-string::iterator::iterator(const int& pos, string& obj) : pos(pos), object(obj)
+string::iterator::iterator(const BSize& pos, string& obj) : pos(pos), object(obj)
 {
 	
 }
@@ -60,9 +60,9 @@ string::string(const char* cString)
 std::shared_ptr<collections::Array<string>> string::split(const string& delimiter)
 {
 	std::shared_ptr<collections::Array<string>> res(new collections::Array<string>());
-	int start = 0;
-	int end = this->findFirst(delimiter);
-	while (end != -1) 
+	BSize start = 0;
+	BSize end = this->findFirst(delimiter);
+	while (end != -1)   // NOLINT(clang-diagnostic-sign-compare)
 	{
 		res->append(this->substring(start, end));
 		start = end + delimiter.getLength();
@@ -72,9 +72,9 @@ std::shared_ptr<collections::Array<string>> string::split(const string& delimite
 	return res;
 }
 
-long long string::count(const char& chr) const
+BSize string::count(const char& chr) const
 {
-	long long count = 0;
+	BSize count = 0;
 	for (int i = 0; i < size; i++)
 	{
 		count += (chars[i] == chr);
@@ -82,9 +82,9 @@ long long string::count(const char& chr) const
 	return count;
 }
 
-long long string::count(const std::function<bool(const char&)>& fun) const
+BSize string::count(const std::function<bool(const char&)>& fun) const
 {
-	long long count = 0;
+	BSize count = 0;
 	for (int i = 0; i < size; i++)
 	{
 		count += fun(chars[i]);
@@ -92,12 +92,12 @@ long long string::count(const std::function<bool(const char&)>& fun) const
 	return count;
 }
 
-long long string::findFirst(const string& str, long long start) const
+BSize string::findFirst(const string& str, BSize start) const
 {
 	return this->findFirst(str.chars, start);
 }
 
-long long string::findFirst(const char* str, long long start) const
+BSize string::findFirst(const char* str, BSize start) const
 {
 	if (start >= strlen(this->chars)) throw std::out_of_range("Start position outside of string range");
 	return std::string(this->chars).find(str, start);
@@ -105,8 +105,9 @@ long long string::findFirst(const char* str, long long start) const
 
 string& string::operator=(const string& other)
 {
+	if (this == &other) return *this;
 	delete[] chars;
-	chars = _strdup(other.chars);
+	chars = strdup(other.chars);
 	size = strlen(chars);
 	return *this;
 }
@@ -114,7 +115,7 @@ string& string::operator=(const string& other)
 string& string::operator=(const char* cString)
 {
 	delete[] chars;
-	chars = _strdup(cString);
+	chars = strdup(cString);
 	return *this;
 }
 
@@ -129,7 +130,7 @@ std::ostream& bell::operator<<(std::ostream& out, const string& obj)
 	return out;
 }
 
-char& string::operator[](const int& index) const
+char& string::operator[](const BSize& index) const
 {
 	if (index >= 0)
 	{
@@ -143,9 +144,9 @@ bool string::operator==(const string& other) const
 	return strcmp(this->chars, other.chars) == 0;
 }
 
-string string::substring(const int& start, const int& end) const
+string string::substring(const BSize& start, const BSize& end) const
 {
-	if (end == -1)
+	if (end == -1)  // NOLINT(clang-diagnostic-sign-compare)
 	{
 		return { std::string(this->chars).substr(start, this->size - start).c_str() };
 	}

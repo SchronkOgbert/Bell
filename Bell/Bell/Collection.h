@@ -1,5 +1,6 @@
 #pragma once
 #include <functional>
+typedef long long BSize;
 
 namespace bell
 {
@@ -9,13 +10,11 @@ namespace bell
 		class ICollection
 		{
 		public:
-			virtual ~ICollection() = default;
-
 			virtual void insert(const long long& index, const T& obj) = 0;
 
-			virtual int findFirst(const T& obj) = 0;
+			virtual BSize findFirst(const T& obj) = 0;
 
-			virtual int findFirst(std::function<bool(const T&)> fun) = 0;
+			virtual BSize findFirst(std::function<bool(const T&)> fun) = 0;
 
 			virtual void removeAt(const long long& index) = 0;
 

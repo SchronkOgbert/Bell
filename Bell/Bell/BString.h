@@ -2,6 +2,10 @@
 
 #ifdef _MSC_VER
 #define strdup(p) _strdup(p)
+inline void strcpy(char* dest, char* source)
+{
+	strcpy_s(dest, strlen(dest) + 1, source);
+}
 #endif
 #include "Array.hpp"
 
@@ -12,15 +16,15 @@ namespace bell
 	{
 		char* chars;
 
-		size_t size;
+		BSize size;
 
 	public:
 		class iterator
 		{
-			int pos;
+			BSize pos;
 			string& object;
 		public:
-			iterator(const int& pos, string& obj);
+			iterator(const BSize& pos, string& obj);
 
 			iterator& operator++();
 
@@ -41,17 +45,17 @@ namespace bell
 
 		std::shared_ptr<collections::Array<string>> split(const string& delimiter = " ");
 
-		[[nodiscard]] long long count(const char& chr) const;
+		[[nodiscard]] BSize count(const char& chr) const;
 
-		long long count(const std::function<bool(const char&)>& fun) const;
+		BSize count(const std::function<bool(const char&)>& fun) const;
 
-		[[nodiscard]] long long findFirst(const string& str, long long start = 0) const;
+		[[nodiscard]] BSize findFirst(const string& str, BSize start = 0) const;
 
-		long long findFirst(const char* str, long long start = 0) const;
+		BSize findFirst(const char* str, BSize start = 0) const;
 
-		[[nodiscard]] string substring(const int& start, const int& end) const;
+		[[nodiscard]] string substring(const BSize& start, const BSize& end) const;
 
-		[[nodiscard]] inline size_t getLength() const { return size; }
+		[[nodiscard]] inline BSize getLength() const { return size; }
 
 		inline iterator begin() { return iterator(0, *this); }
 
@@ -63,7 +67,7 @@ namespace bell
 
 		string& operator=(const char* cString);
 
-		char& operator[](const int& index) const;
+		char& operator[](const BSize& index) const;
 
 		bool operator==(const string&) const;
 

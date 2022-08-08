@@ -6,6 +6,19 @@ namespace bell
 {
 	namespace core
 	{
+		//overloaded << for shared ptr and unique ptr
+		template<class T>
+		std::ostream& operator<<(std::ostream& out, const std::shared_ptr<T>& obj)
+		{
+			return out << *obj;
+		}
+
+		template <class T>
+		std::ostream& operator<<(std::ostream& out, std::unique_ptr<T>& obj)
+		{
+			return out << *obj;
+		}
+
 		// print functions
 		template<class T>
 		void print(const T& t)
@@ -92,19 +105,6 @@ namespace bell
 			print(message);
 			std::cin >> res;
 			return res;
-		}
-
-		//overloaded << for shared ptr and unique ptr
-		template<class T>
-		std::ostream& operator<<(std::ostream& out, const std::shared_ptr<T>& obj)
-		{
-			return out << *obj;
-		}
-
-		template <class T>
-		std::ostream& operator<<(std::ostream& out, std::unique_ptr<T>& obj)
-		{
-			return out << *obj;
 		}
 	}
 }
