@@ -147,6 +147,8 @@
     <ClInclude Include="Collection.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="List.hpp" />
+    <ClInclude Include="Node.hpp" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="BString.h" />
   </ItemGroup>
