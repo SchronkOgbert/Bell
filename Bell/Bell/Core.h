@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <type_traits>
 
 namespace bell
 {
@@ -35,7 +36,7 @@ namespace bell
 		template<class T>
 		void print(T* t)
 		{
-			std::cout << *t;
+			std::cout << t;
 		}
 
 		template <class T, class ... TAIL>
