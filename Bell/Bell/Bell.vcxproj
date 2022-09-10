@@ -143,9 +143,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Array.hpp" />
+    <ClInclude Include="Collection.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="List.hpp" />
+    <ClInclude Include="Node.hpp" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="BString.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bell.cpp" />
@@ -156,6 +161,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="BString.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

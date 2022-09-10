@@ -9,5 +9,9 @@
 
 // add headers that you want to pre-compile here
 #include "framework.h"
+#include "Core.h"
+#include "Collection.h"
+#include "Array.hpp"
+#include "BString.h"
 
 #endif //PCH_H
