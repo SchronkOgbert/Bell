@@ -1,6 +1,7 @@
 #pragma once
 #include <ostream>
 #include <stdexcept>
+#include <initializer_list>
 
 #include "Collection.h"
 
@@ -14,11 +15,11 @@ namespace bell
 			T* elements;
 
 			// actual number of elements
-			BSize size{};
+			BSize size;
 
 
 			// how many elements there are in memory
-			BSize capacity{};
+			BSize capacity;
 			
 			T* duplicateArray(
 				T* source,
@@ -65,6 +66,17 @@ namespace bell
 				this->size = other.size;
 				this->capacity = other.capacity;
 				elements = duplicateArray(other.elements, capacity, size);
+			}
+
+			Array(const std::initializer_list<T>& numbers)
+			{
+				this->size = 0;
+				this->capacity = numbers.size();
+				this->elements = new T[this->capacity];
+				for (auto& el : numbers)
+				{
+					this->append(el);
+				}
 			}
 
 			virtual ~Array()
@@ -195,6 +207,8 @@ namespace bell
 			{
 				return size;
 			}
+
+			[[nodiscard]] T* getCArray() const { return this->elements; }
 
 			// iterators
 			class iterator

@@ -57,6 +57,8 @@ namespace bell
 
 		[[nodiscard]] inline BSize getLength() const { return size; }
 
+		[[nodiscard]] char* getCString() const { return chars; }
+
 		inline iterator begin() { return iterator(0, *this); }
 
 		inline iterator end() { return iterator(size, *this); }
