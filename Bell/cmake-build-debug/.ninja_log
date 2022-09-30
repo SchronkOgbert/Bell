@@ -1,0 +1,10 @@
+# ninja log v5
+10	66	6862527734738788	CMakeFiles/Bell.dir/CMakeFiles/3.23.2/CompilerIdCXX/CMakeCXXCompilerId.cpp.obj	603f4d39c7636e5f
+8	645	6862528055887812	CMakeFiles/Bell.dir/Bell/pch.cpp.obj	bf1bc1b203060656
+6	647	6862528055897822	CMakeFiles/Bell.dir/Bell/Bell.cpp.obj	da3078ce3dd33931
+3	647	6862528055907803	CMakeFiles/Bell.dir/Bell/Core.cpp.obj	fd923410477a8dc0
+6	633	6862528585712524	CMakeFiles/Bell.dir/Bell/Core.cpp.obj	fd923410477a8dc0
+10	637	6862528585742533	CMakeFiles/Bell.dir/Bell/pch.cpp.obj	bf1bc1b203060656
+8	679	6862528586162629	CMakeFiles/Bell.dir/Bell/Bell.cpp.obj	da3078ce3dd33931
+3	754	6862528586912803	CMakeFiles/Bell.dir/Bell/BString.cpp.obj	e53f3eede0a56982
+754	904	6862528588323123	Bell.exe	69710e9cb8d8c086

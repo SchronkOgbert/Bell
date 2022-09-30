@@ -1,4 +1,5 @@
 #pragma once
+#include <cstring>
 
 #ifdef _MSC_VER
 #define strdup(p) _strdup(p)
