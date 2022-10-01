@@ -21,6 +21,8 @@ namespace bell
 			virtual void remove(const T& obj) = 0;
 
 			virtual void remove(const std::function<bool(const T&)>& fun) = 0;
+
+			virtual bool empty() = 0;
 		};
 	}
 }

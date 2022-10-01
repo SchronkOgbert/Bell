@@ -54,6 +54,8 @@ namespace bell
 
 		BSize findFirst(const char* str, BSize start = 0) const;
 
+		[[nodiscard]] bool empty() const;
+
 		[[nodiscard]] string substring(const BSize& start, const BSize& end) const;
 
 		[[nodiscard]] inline BSize getLength() const { return size; }

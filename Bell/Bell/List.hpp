@@ -78,6 +78,11 @@ namespace bell
 				throw std::logic_error("Not implemented");
 			}
 
+			bool empty() override
+			{
+				return !size;
+			}
+
 			T operator[](long long&& index) const
 			{
 				if (index >= size)

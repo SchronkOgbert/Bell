@@ -103,6 +103,11 @@ BSize string::findFirst(const char* str, BSize start) const
 	return std::string(this->chars).find(str, start);
 }
 
+bool string::empty() const
+{
+	return !size;
+}
+
 string& string::operator=(const string& other)
 {
 	if (this == &other) return *this;
