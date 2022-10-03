@@ -7,7 +7,7 @@
 namespace bell::collections
 {
 	template <class T>
-	class Queue final : ICollection<T>
+	class Stack final : ICollection<T>
 	{
 		struct Node
 		{
@@ -17,11 +17,11 @@ namespace bell::collections
 		};
 		Node* root;
 	public:
-		Queue()
+		Stack()
 		{
 			root = nullptr;
 		}
-		Queue(const std::initializer_list<T>& elements)
+		Stack(const std::initializer_list<T>& elements)
 		{
 			root = nullptr;
 			for(auto& el : elements)

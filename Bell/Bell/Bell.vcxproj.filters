@@ -39,7 +39,7 @@
     <ClInclude Include="List.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Queue.hpp">
+    <ClInclude Include="Stack.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

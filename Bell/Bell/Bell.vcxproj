@@ -151,7 +151,7 @@
     <ClInclude Include="Node.hpp" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="BString.h" />
-    <ClInclude Include="Queue.hpp" />
+    <ClInclude Include="Stack.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bell.cpp" />
