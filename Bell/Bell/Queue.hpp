@@ -3,74 +3,61 @@
 #include <stdexcept>
 
 #include "Collection.h"
-#include "Core.h"
-
-using bell::core::println;
 
 namespace bell::collections
 {
 	template <class T>
-	class Stack final : public ICollection<T>
+	class Queue final : public ICollection<T>
 	{
 		struct Node
 		{
 			T value;
-			Node* prev;
-			Node(const T& value, Node* prev = nullptr) : value(value), prev(prev) {}
+			Node *prev, *next;
+			Node(const T& value, Node* prev = nullptr, Node* next = nullptr) :
+			value(value), prev(prev), next(next) {}
 		};
-		Node* root;
+		Node *head, *tail;
 	public:
-		Stack()
+		Queue()
 		{
-			root = nullptr;
+			head = nullptr;
+			tail = nullptr;
 		}
-		Stack(const std::initializer_list<T>& elements)
+		Queue(const std::initializer_list<T>& elements)
 		{
-			root = nullptr;
-			for(auto& el : elements)
+			head = nullptr;
+			tail = nullptr;
+			for (auto& el : elements)
 			{
 				this->push(el);
 			}
 		}
 
-		~Stack()
+		void push_back(const T& element)
 		{
-			Node* walker = root;
-			while(walker->prev)
-			{
-				const Node* current = walker;
-				walker = walker->prev;
-				delete current;
-			}
-			println("destructor for stack");
+			tail = new Node(element, tail);
+			if (!head) head = tail;
 		}
 
-		void push(const T& element)
+		void pop_front()
 		{
-			root = new Node(element, root);
+			
 		}
 
-		void pop()
+		T back()
 		{
-			const Node* old_root = root;
-			root = root->prev;
-			delete old_root;
-		}
-
-		T top()
-		{
-			if (!root) throw std::exception("Queue is empty");
-			return root->value;
+			if (!tail) throw std::exception("Queue is empty");
+			return tail->value;
 		}
 
 		bool empty() override
 		{
-			return !root;
+			return !head;
 		}
 
 		void insert(const long long& index, const T& obj) override
 		{
-			throw std::logic_error("Not implemented");
+			throw std::logic_error("Please use Queue::push_back to add elements");
 		}
 		BSize findFirst(const T& obj) override
 		{

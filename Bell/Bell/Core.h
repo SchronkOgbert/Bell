@@ -4,6 +4,12 @@
 #include <type_traits>
 #include <memory>
 
+#if defined _DEBUG
+inline bool shouldPrint = true;
+#else
+inline bool shouldPrint = false;
+#endif
+
 namespace bell
 {
 	namespace core
@@ -25,19 +31,22 @@ namespace bell
 		template<class T>
 		void print(const T& t)
 		{
-			std::cout << t;
+			if (shouldPrint)
+				std::cout << t;
 		}
 
 		template<class T>
 		void print(const T&& t)
 		{
-			std::cout << t;
+			if (shouldPrint)
+				std::cout << t;
 		}
 
 		template<class T>
 		void print(T* t)
 		{
-			std::cout << t;
+			if (shouldPrint)
+				std::cout << t;
 		}
 
 		template <class T, class ... TAIL>

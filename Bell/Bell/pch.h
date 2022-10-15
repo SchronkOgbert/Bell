@@ -13,5 +13,7 @@
 #include "Collection.h"
 #include "Array.hpp"
 #include "BString.h"
+#include "Queue.hpp"
+#include "Stack.hpp"
 
 #endif //PCH_H
