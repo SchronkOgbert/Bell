@@ -349,3 +349,10 @@ healthchecksdb
 MigrationBackup/
 
 Bell/.idea/
+
+
+*.cmake
+.idea
+/Bell/cmake-build-debug*
+
+Bell/venv/
